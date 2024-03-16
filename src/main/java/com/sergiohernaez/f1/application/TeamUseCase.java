@@ -6,7 +6,6 @@ import com.sergiohernaez.f1.infrastructure.TeamRepository;
 import com.sergiohernaez.f1.presentation.TeamDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +22,7 @@ public class TeamUseCase {
         return teamRepository.findAll().stream().map(team -> teamMapper.teamToDto(team)).toList();
     }
 
-    public Boolean addTeam(@RequestBody TeamDTO teamDTO) {
+    public Boolean addTeam(TeamDTO teamDTO) {
         try {
             if(validateYear(teamDTO.getYearOfCreation()) && Objects.isNull(teamDTO.getId())) {
                 Team team = teamMapper.dtoToTeam(teamDTO);
@@ -36,7 +35,7 @@ public class TeamUseCase {
         }
     }
 
-    public Boolean updateTeam(@RequestBody TeamDTO teamDTO) {
+    public Boolean updateTeam(TeamDTO teamDTO) {
         try {
             Optional<Team> team = teamRepository.findById(teamDTO.getId());
             if(team.isPresent() && validateYear(teamDTO.getYearOfCreation())) {
@@ -50,7 +49,7 @@ public class TeamUseCase {
         }
     }
 
-    public Boolean deleteTeam(@PathVariable Long teamId) {
+    public Boolean deleteTeam(Long teamId) {
         try {
             teamRepository.deleteById(teamId);
             return true;

@@ -31,7 +31,7 @@ public class TeamController {
         else return new ResponseEntity<>("Could not be updated",HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping("/team/{id}")
+    @DeleteMapping("/team/{teamId}/")
     public ResponseEntity<String> deleteTeam(@PathVariable Long teamId) {
         if(teamUseCase.deleteTeam(teamId)) return new ResponseEntity<>("Deleted",HttpStatus.OK);
         else return new ResponseEntity<>("Could not be deleted",HttpStatus.BAD_REQUEST);
